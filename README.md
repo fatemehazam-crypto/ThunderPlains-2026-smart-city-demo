@@ -21,13 +21,15 @@ npm start
 
 The dashboard opens at **http://localhost:3000**. That's it. `npm start` runs everything in one window: an MQTT broker, the backend, the dashboard, the phone relay and the demo helpers. **Ctrl+C stops it all.**
 
-When it's up, the window prints the addresses you need:
+When it's up, the window prints the addresses you need, using **your laptop's own address on your Wi-Fi** (it's detected automatically, so yours will be different):
 
 ```
   Dashboard        http://localhost:3000
-  Phones join at   http://192.168.1.23:8080   (QR code in the Stage tab)
-  ESP32 / MQTT     192.168.1.23:1883   topic smartcity/<node-id>/<metric>
+  Phones join at   http://<your-laptop-ip>:8080   (QR code in the Stage tab)
+  ESP32 / MQTT     <your-laptop-ip>:1883   topic smartcity/<node-id>/<metric>
 ```
+
+Phones must be on the same Wi-Fi as the laptop to join this way. ESP32s need `<your-laptop-ip>` as their MQTT server; if your laptop's address changes, reserve one for it in your router's settings.
 
 ## The demos
 
