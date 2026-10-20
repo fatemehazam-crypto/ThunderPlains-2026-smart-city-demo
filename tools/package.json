@@ -1,0 +1,7 @@
+{
+  "name": "smartcity-tools",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Helper scripts: sensor check",
+  "dependencies": { "mqtt": "^5.10.4" }
+}

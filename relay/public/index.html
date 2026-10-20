@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#F2C230">
+<title>Become a node — ThunderPlains testbed</title>
+<style>
+  @font-face { font-family: "Barlow Condensed"; font-weight: 700; font-display: swap;
+    src: url("/fonts/barlow-condensed-latin-700-normal.woff2") format("woff2"); }
+  @font-face { font-family: "Barlow"; font-weight: 400; font-display: swap;
+    src: url("/fonts/barlow-latin-400-normal.woff2") format("woff2"); }
+  @font-face { font-family: "Barlow"; font-weight: 500; font-display: swap;
+    src: url("/fonts/barlow-latin-500-normal.woff2") format("woff2"); }
+
+  :root {
+    --tag: #F2C230;      /* safety yellow: the phone becomes an asset tag */
+    --ink: #16222E;
+    --ink-soft: #4B5257;
+    --live: #17663F;
+    --alarm: #A3231B;
+    --rule: 3px;
+    color-scheme: light;
+  }
+  * { box-sizing: border-box; }
+  html, body { height: 100%; margin: 0; }
+  body {
+    background: var(--tag);
+    color: var(--ink);
+    font: 400 1.0625rem/1.45 "Barlow", system-ui, -apple-system, "Segoe UI", sans-serif;
+    padding: max(14px, env(safe-area-inset-top)) 14px max(14px, env(safe-area-inset-bottom));
+    -webkit-tap-highlight-color: transparent;
+  }
+  .tag {
+    position: relative;
+    min-height: 100%;
+    max-width: 30rem;
+    margin: 0 auto;
+    border: var(--rule) solid var(--ink);
+    border-radius: 14px;
+    padding: 1.4rem 1.25rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+  }
+  /* The grommet hole of a printed asset tag. */
+  .tag::before {
+    content: "";
+    position: absolute;
+    top: 1.1rem; right: 1.1rem;
+    width: 22px; height: 22px;
+    border: var(--rule) solid var(--ink);
+    border-radius: 50%;
+  }
+  .owner { margin: 0; font-weight: 500; color: var(--ink-soft); padding-right: 2.5rem; }
+  h1 {
+    font-family: "Barlow Condensed", "Arial Narrow", sans-serif;
+    font-weight: 700;
+    font-size: clamp(2.6rem, 13vw, 4rem);
+    line-height: 0.95;
+    letter-spacing: -0.01em;
+    margin: 0;
+    overflow-wrap: anywhere;
+  }
+  .kicker { margin: 0 0 -0.6rem; font-weight: 500; }
+  p { margin: 0; max-width: 34ch; }
+  hr { border: 0; border-top: var(--rule) solid var(--ink); margin: 0.2rem 0; width: 100%; }
+  .fine { font-size: 0.9375rem; color: var(--ink-soft); }
+
+  button {
+    font: 700 1.5rem/1 "Barlow Condensed", "Arial Narrow", sans-serif;
+    color: var(--tag);
+    background: var(--ink);
+    border: 0;
+    border-radius: 10px;
+    padding: 1.15rem 1rem;
+    width: 100%;
+    cursor: pointer;
+    touch-action: manipulation;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+  button:focus-visible { outline: 3px solid var(--ink); outline-offset: 4px; }
+  button:active { transform: translateY(1px); }
+  button[disabled] { opacity: 0.55; cursor: default; }
+  .tap-btn { font-size: 2rem; padding: 1.6rem 1rem; }
+
+  .status { display: flex; align-items: center; gap: 0.6rem; font-weight: 500; }
+  .dot { width: 14px; height: 14px; border-radius: 50%; background: var(--ink-soft); flex: none; }
+  .status.live .dot { background: var(--live); }
+  .status.down .dot { background: var(--alarm); }
+  .dot.beat { animation: beat 600ms ease-out; }
+  @keyframes beat {
+    0% { box-shadow: 0 0 0 0 rgba(23, 102, 63, 0.55); }
+    100% { box-shadow: 0 0 0 12px rgba(23, 102, 63, 0); }
+  }
+
+  .readout { display: grid; grid-template-columns: auto 1fr; gap: 0.55rem 0.9rem; align-items: center; }
+  .readout dt { font-weight: 500; }
+  .readout dd { margin: 0; font-variant-numeric: tabular-nums; }
+  .meter { height: 18px; border: var(--rule) solid var(--ink); border-radius: 4px; overflow: hidden; }
+  .meter > span { display: block; height: 100%; width: 0%; background: var(--ink); transition: width 120ms linear; }
+
+  .storm { display: flex; gap: 14px; align-items: center; border: var(--rule) solid var(--ink);
+    border-radius: 10px; padding: 12px 14px; }
+  .storm-icon { width: 72px; height: 72px; flex: none; }
+  .storm-icon svg { width: 100%; height: 100%; display: block; }
+  .storm-title { margin: 0 0 2px; font: 700 1.5rem/1.05 "Barlow Condensed", "Arial Narrow", sans-serif; }
+  .storm-text { margin: 0; font-size: 0.9375rem; line-height: 1.35; }
+  .push { margin-top: auto; }
+  [hidden] { display: none !important; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .dot.beat { animation: none; }
+    .meter > span { transition: none; }
+  }
+</style>
+</head>
+<body>
+<main class="tag">
+  <p class="owner">ThunderPlains 2026 testbed</p>
+
+  <!-- Before joining -->
+  <section id="v-intro">
+    <h1>Become a sensor node</h1>
+  </section>
+  <p id="intro-copy">Your phone joins the same event bus as our ESP32 sensors and drones. The stage sees your shake level and taps live.</p>
+  <p id="intro-fine" class="fine">Sends only a shake level and a tap count, once a second. No name, no location.</p>
+  <button id="join" class="push" type="button">Join the testbed</button>
+
+  <!-- Waiting / closed / full / ended -->
+  <section id="v-msg" hidden>
+    <h1 id="msg-title"></h1>
+  </section>
+  <p id="msg-copy" hidden></p>
+
+  <!-- Live -->
+  <section id="v-live" hidden>
+    <p class="kicker">You are node</p>
+    <h1 id="label">—</h1>
+  </section>
+  <div id="storm" class="storm" hidden>
+    <div id="storm-icon" class="storm-icon" aria-hidden="true"></div>
+    <div>
+      <p id="storm-title" class="storm-title"></p>
+      <p id="storm-text" class="storm-text"></p>
+    </div>
+  </div>
+  <p id="join-order" class="fine" hidden></p>
+  <hr id="live-rule" hidden>
+  <div id="status" class="status" role="status" hidden><span class="dot" id="dot"></span><span id="status-text">Connecting</span></div>
+  <dl id="readout" class="readout" hidden>
+    <dt>Shake</dt><dd><div class="meter" role="meter" aria-label="Shake level" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="meter"><span id="meter-fill"></span></div></dd>
+    <dt>Taps sent</dt><dd id="taps-total">0</dd>
+  </dl>
+  <p id="motion-note" class="fine" hidden>Motion sensor is off, so only taps count. That's fine.</p>
+  <button id="tap" class="tap-btn push" type="button" hidden>Ping the stage</button>
+  <p id="leave-note" class="fine" hidden>Close this tab and the stage will notice you go silent.</p>
+</main>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/storms.js"></script>
+<script src="/app.js"></script>
+</body>
+</html>

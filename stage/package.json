@@ -1,0 +1,11 @@
+{
+  "name": "smartcity-stage",
+  "version": "1.0.0",
+  "private": true,
+  "description": "One-command launcher and the agent behind the dashboard's Stage tab",
+  "scripts": {
+    "start": "node start.js",
+    "agent": "node agent.js"
+  },
+  "dependencies": { "mqtt": "^5.10.4" }
+}

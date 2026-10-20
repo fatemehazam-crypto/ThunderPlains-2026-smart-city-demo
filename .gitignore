@@ -1,0 +1,15 @@
+node_modules/
+dist/
+backend/data/
+stage/stage.config.json
+frontend/.env
+.env
+*.log
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+# ESP32 sketches: keep your real Wi-Fi details out of git
+firmware/**/secrets.h
+# Local alerting-policy overrides (see docs/ALERTING.md)
+backend/config/alerting.local.json

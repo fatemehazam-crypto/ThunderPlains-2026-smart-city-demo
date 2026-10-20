@@ -1,0 +1,283 @@
+{
+  "version": "1.0",
+  "exportedAt": "2026-10-13T00:00:00.000Z",
+  "router": {
+    "mx": 0.03,
+    "my": -2.18
+  },
+  "buildings": [
+    {
+      "id": "b1",
+      "btype": "story1",
+      "label": "Building-b",
+      "mx": -0.46,
+      "my": -1.01,
+      "w": 0.45,
+      "h": 0.35
+    },
+    {
+      "id": "b8",
+      "btype": "hospital",
+      "label": "Hospital 8",
+      "mx": -0.46,
+      "my": 1.01,
+      "w": 0.45,
+      "h": 0.35
+    },
+    {
+      "id": "b11",
+      "btype": "story3",
+      "label": "Main Hub",
+      "mx": 0.49,
+      "my": 1.02,
+      "w": 0.45,
+      "h": 0.35
+    },
+    {
+      "id": "b14",
+      "btype": "story3",
+      "label": "Security Perimeter",
+      "mx": 0.44,
+      "my": -1,
+      "w": 0.45,
+      "h": 0.35
+    }
+  ],
+  "sensors": [
+    {
+      "id": "building-b",
+      "label": "Humidity",
+      "building": "Building-b",
+      "buildingId": "b1",
+      "buildingType": "story1",
+      "type": "environmental",
+      "sensor": "DHT22 Humidity",
+      "mqttTopic": "smartcity/building-b",
+      "rfFrequency": "2.4ghz",
+      "publishIntervalMs": 1000,
+      "metrics": [
+        "temperature",
+        "humidity",
+        "wifi_rssi"
+      ],
+      "position": {
+        "mx": -0.45,
+        "my": -0.95
+      },
+      "thresholds": {
+        "wifi_rssi": -85,
+        "rssi_jump": 15,
+        "temp_min": -10,
+        "temp_max": 60,
+        "temp_jump": 5,
+        "humidity_min": 10,
+        "humidity_max": 95
+      }
+    },
+    {
+      "id": "intersection",
+      "label": "Traffic Control",
+      "building": null,
+      "buildingId": null,
+      "buildingType": null,
+      "type": "traffic",
+      "sensor": "LED Traffic Light Module",
+      "mqttTopic": "smartcity/intersection",
+      "rfFrequency": "2.4ghz",
+      "publishIntervalMs": 1000,
+      "metrics": [
+        "light_state",
+        "wifi_rssi"
+      ],
+      "position": {
+        "mx": -0.33,
+        "my": 0.35
+      },
+      "thresholds": {
+        "wifi_rssi": -85,
+        "rssi_jump": 15
+      }
+    },
+    {
+      "id": "intersection",
+      "label": "Traffic Control",
+      "building": null,
+      "buildingId": null,
+      "buildingType": null,
+      "type": "traffic",
+      "sensor": "LED Traffic Light Module",
+      "mqttTopic": "smartcity/intersection",
+      "rfFrequency": "2.4ghz",
+      "publishIntervalMs": 1000,
+      "metrics": [
+        "light_state",
+        "wifi_rssi"
+      ],
+      "position": {
+        "mx": 0.33,
+        "my": 0.31
+      },
+      "thresholds": {
+        "wifi_rssi": -85,
+        "rssi_jump": 15
+      }
+    },
+    {
+      "id": "intersection",
+      "label": "Traffic Control",
+      "building": null,
+      "buildingId": null,
+      "buildingType": null,
+      "type": "traffic",
+      "sensor": "LED Traffic Light Module",
+      "mqttTopic": "smartcity/intersection",
+      "rfFrequency": "2.4ghz",
+      "publishIntervalMs": 1000,
+      "metrics": [
+        "light_state",
+        "wifi_rssi"
+      ],
+      "position": {
+        "mx": 0.28,
+        "my": -0.33
+      },
+      "thresholds": {
+        "wifi_rssi": -85,
+        "rssi_jump": 15
+      }
+    },
+    {
+      "id": "intersection",
+      "label": "Traffic Control",
+      "building": null,
+      "buildingId": null,
+      "buildingType": null,
+      "type": "traffic",
+      "sensor": "LED Traffic Light Module",
+      "mqttTopic": "smartcity/intersection",
+      "rfFrequency": "2.4ghz",
+      "publishIntervalMs": 1000,
+      "metrics": [
+        "light_state",
+        "wifi_rssi"
+      ],
+      "position": {
+        "mx": -0.33,
+        "my": -0.3
+      },
+      "thresholds": {
+        "wifi_rssi": -85,
+        "rssi_jump": 15
+      }
+    },
+    {
+      "id": "building-c",
+      "label": "Heart-Rate Sensor",
+      "building": "Hospital 8",
+      "buildingId": "b8",
+      "buildingType": "hospital",
+      "type": "medical",
+      "sensor": "MAX30102 Heart Rate Sensor",
+      "mqttTopic": "smartcity/building-c",
+      "rfFrequency": "2.4ghz",
+      "publishIntervalMs": 100,
+      "metrics": [
+        "heart_rate",
+        "spo2",
+        "wifi_rssi"
+      ],
+      "position": {
+        "mx": -0.58,
+        "my": 1.09
+      },
+      "thresholds": {
+        "wifi_rssi": -85,
+        "rssi_jump": 15,
+        "heart_rate_min": 40,
+        "heart_rate_max": 120,
+        "spo2_min": 94
+      }
+    },
+    {
+      "id": "gps-node",
+      "label": "GPS",
+      "building": null,
+      "buildingId": null,
+      "buildingType": null,
+      "type": "gps",
+      "sensor": "SparkFun GNSS L1/L5 Breakout - NEO-F10N",
+      "mqttTopic": "smartcity/gps-node",
+      "rfFrequency": "gps-l1l5",
+      "publishIntervalMs": 1000,
+      "metrics": [
+        "satellites",
+        "snr_l1",
+        "snr_l5",
+        "lock_status",
+        "lat",
+        "lng"
+      ],
+      "position": {
+        "mx": 1.33,
+        "my": 2.22
+      },
+      "thresholds": {
+        "snr_l1": 25,
+        "snr_l5": 25,
+        "sat_drop": 4
+      }
+    },
+    {
+      "id": "building-a",
+      "label": "High-Bandwidth Urban Sensor",
+      "building": "Main Hub",
+      "buildingId": "b11",
+      "buildingType": "story3",
+      "type": "hub",
+      "sensor": "Seeed Studio XIAO ESP32-S3 Sense (Pre-Soldered)",
+      "mqttTopic": "smartcity/building-a",
+      "rfFrequency": "2.4ghz",
+      "publishIntervalMs": 1000,
+      "metrics": [
+        "video_fps",
+        "audio_db",
+        "wifi_rssi"
+      ],
+      "position": {
+        "mx": 0.34,
+        "my": 1.1
+      },
+      "thresholds": {
+        "wifi_rssi": -85,
+        "rssi_jump": 15,
+        "video_fps_min": 15,
+        "audio_db_min": 20
+      }
+    },
+    {
+      "id": "perimeter",
+      "label": "Security",
+      "building": "Security Perimeter",
+      "buildingId": "b14",
+      "buildingType": "story3",
+      "type": "security",
+      "sensor": "433MHz PIR Motion Sensor",
+      "mqttTopic": "smartcity/perimeter",
+      "rfFrequency": "433mhz",
+      "publishIntervalMs": 500,
+      "metrics": [
+        "motion_detected",
+        "door_open",
+        "signal_433"
+      ],
+      "position": {
+        "mx": 0.32,
+        "my": -1.01
+      },
+      "thresholds": {
+        "signal_433": -80,
+        "rssi_jump": 15
+      }
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "name": "smartcity-backend",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Event-bus backend: MQTT in, normalized state + alerts out over Socket.io, SQLite history",
+  "main": "server.js",
+  "scripts": {
+    "start": "node --no-warnings=ExperimentalWarning server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "mqtt": "^5.10.4",
+    "socket.io": "^4.8.1"
+  }
+}

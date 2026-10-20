@@ -1,0 +1,7 @@
+{
+  "_about": "Simulated interference for demos (the Stage tab's Trigger buttons). Nothing is transmitted. Real interference builds up as a source powers on or gets closer, and devices farther away notice later, so the effect ramps in instead of switching on all at once.",
+  "rampUpMs": 8000,
+  "staggerMs": 1000,
+  "autoInterference": false,
+  "_notes": "rampUpMs: how long the interference takes to reach full strength on a device (0 = instant). staggerMs: each device starts feeling it up to this much later than the first. autoInterference: in demo mode, also hit a random device for 15 s every minute without you pressing anything (the environment variable DEMO_AUTO_INTERFERENCE=true/false wins over this)."
+}

@@ -1,0 +1,23 @@
+{
+  "_readme": "Optional. Copy to stage.config.json and keep only the settings you want to change. Everything else uses the defaults in stage/config.js.",
+
+  "broker": "built-in",
+  "mqttBroker": "mqtt://localhost:1883",
+  "openBrowser": true,
+  "demoMode": true,
+
+  "relay": "local",
+  "relayPort": 8080,
+
+  "_remote_relay_example": "To use a relay you deployed (HTTPS, so phone shake works): set relay to remote and fill in both lines below.",
+  "relayUrl": "https://your-name.onrender.com",
+  "stageToken": "the-same-STAGE_TOKEN-you-set-on-the-host",
+
+  "backendEnv": { "DEMO_AUTO_INTERFERENCE": "false" },
+
+  "replay": {
+    "defaultSpeed": 2,
+    "profile": "flights/profile_1.json",
+    "flights": ["flights/attacked_cf-e8.jsonl", "flights/attacked_cf-e9.jsonl"]
+  }
+}

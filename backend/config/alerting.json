@@ -1,0 +1,142 @@
+{
+  "_about": "Alerting policy: WHEN the system raises, clears and groups alerts. Changing this file changes behavior without touching code. Every key is explained in docs/ALERTING.md. Times are in milliseconds (keys end in Ms). Restart the backend after editing; it checks this file at startup and refuses to start if a value is invalid.",
+  "thresholds": {
+    "_about": "WHAT counts as bad. These are the starting values for the dashboard's Settings tab, which can change them while running. A sensor's own thresholds in layout.json win over these.",
+    "watchdogTimeout": 15,
+    "rssiThreshold": -85,
+    "signal433Threshold": -80,
+    "snrL1Threshold": 25,
+    "snrL5Threshold": 25,
+    "tempJumpThreshold": 5,
+    "rssiJumpThreshold": 15,
+    "satDropThreshold": 4,
+    "heartRateMin": 40,
+    "heartRateMax": 120,
+    "spo2Min": 94,
+    "packetLossWindow": 30,
+    "expectedIntervalMs": 1000,
+    "bulkSendThreshold": 3,
+    "gapThresholdMs": 2000,
+    "rssiVarianceWindow": 10
+  },
+  "defaults": {
+    "_about": "Applies to every alert unless its rule below says otherwise. oneOffEventCooldownMs: minimum time between repeats of a one-off event (sudden Wi-Fi drop, temperature spike) on the same device.",
+    "alertAfterMs": 2000,
+    "clearAfterMs": 5000,
+    "remindEveryMs": 300000,
+    "oneOffEventCooldownMs": 30000
+  },
+  "rules": {
+    "_about": "Per alert. alertAfterMs: how long a problem must last before it is an alert (0 = first bad reading). clearAfterMs: how long it must stay fixed before the alert clears. clearMargin: how far past the threshold a value must recover before it counts as fixed, in the metric's own unit.",
+    "wifi_low": {
+      "clearMargin": 3
+    },
+    "433_low": {
+      "clearMargin": 3
+    },
+    "gps_l1_low": {
+      "clearMargin": 2
+    },
+    "gps_l5_low": {
+      "clearMargin": 2
+    },
+    "gps_lock": {
+      "alertAfterMs": 0
+    },
+    "hr_range": {
+      "alertAfterMs": 1000,
+      "clearMargin": 3
+    },
+    "hr_missing": {
+      "alertAfterMs": 3000
+    },
+    "spo2_low": {
+      "alertAfterMs": 1000,
+      "clearMargin": 1
+    },
+    "temp_range": {
+      "clearMargin": 1
+    },
+    "fps_low": {
+      "clearMargin": 2
+    },
+    "readings_lost": {
+      "alertAfterMs": 0
+    },
+    "rf_degraded": {
+      "alertAfterMs": 10000,
+      "clearAfterMs": 10000
+    },
+    "off_route": {
+      "alertAfterMs": 0,
+      "clearAfterMs": 2000
+    },
+    "battery": {
+      "alertAfterMs": 3000,
+      "alertBelowV": 3.7,
+      "clearAboveV": 3.75,
+      "warningBelowV": 3.5,
+      "criticalBelowV": 3.2
+    }
+  },
+  "grouping": {
+    "_about": "One cause, one incident. Alerts are held for waitMs so related ones can arrive; signal problems on the same radio band then become one incident.",
+    "waitMs": {
+      "demo": 3000,
+      "live": 10000
+    },
+    "siteLevelDevices": 3,
+    "aftermathMs": 60000,
+    "bands": {
+      "2.4ghz": "2.4 GHz",
+      "433mhz": "433 MHz",
+      "gps-l1l5": "GPS"
+    },
+    "causes": [
+      "wifi_low",
+      "433_low",
+      "gps_l1_low",
+      "gps_l5_low",
+      "gps_lock"
+    ],
+    "symptoms": [
+      "readings_lost",
+      "hr_missing",
+      "rf_degraded",
+      "fps_low"
+    ]
+  },
+  "silence": {
+    "_about": "What happens when a device goes quiet. The sensor watchdog itself is thresholds.watchdogTimeout.",
+    "staleAlertCloseMs": 600000,
+    "startupGraceMs": 60000
+  },
+  "rf": {
+    "_about": "Radio health. A device's normal rhythm is learned from its own heartbeat. A gap is a silence longer than gapAfterIntervals × that rhythm (and at least thresholds.gapThresholdMs); a burst is readings arriving closer together than burstUnderInterval × the rhythm.",
+    "learnFromReadings": 5,
+    "gapAfterIntervals": 2.5,
+    "burstUnderInterval": 0.2,
+    "recentReadings": 20,
+    "recentWindowMs": 60000,
+    "signalSpreadAlertDb": 5,
+    "packetLossAlertPct": 10
+  },
+  "drones": {
+    "_about": "A drone's silence is judged against its mission: landed at home after the route is normal, anything else is an alert.",
+    "telemetryTimeoutMs": 4000,
+    "landedBelowM": 0.25,
+    "offRouteMemoryMs": 180000,
+    "airborneAboveM": 0.15,
+    "waypointReachedWithinM": 0.3,
+    "offRouteBeyondM": 0.3,
+    "offRouteMessageCooldownMs": 10000
+  },
+  "audience": {
+    "_about": "Phones in the audience demo. AUDIENCE_WATCHDOG_MS and AUDIENCE_AUTO_PURGE_MS environment variables still override these.",
+    "watchdogMs": 5000,
+    "stormWindowMs": 3000,
+    "stormMinPhones": 10,
+    "endGuardMs": 3000,
+    "autoPurgeMs": 0
+  }
+}

@@ -1,0 +1,15 @@
+# Optional: deploy the phone relay to Render (free) so phones join over HTTPS.
+# HTTPS lets phones share motion (shake). On plain local Wi-Fi, taps work but shake doesn't.
+# Steps: docs/DEPLOY_RELAY.md
+services:
+  - type: web
+    name: smartcity-phone-relay
+    runtime: node
+    plan: free
+    rootDir: relay
+    buildCommand: npm install --omit=dev
+    startCommand: node server.js
+    healthCheckPath: /healthz
+    envVars:
+      - key: STAGE_TOKEN
+        generateValue: true

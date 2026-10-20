@@ -1,0 +1,8 @@
+{
+  "_note": "role 0 and role 1 are the original, real, flight-verified paths. role 2 is a PLACEHOLDER for 3-drone trials — verify against actual Lighthouse coverage before flying.",
+  "roles": [
+    {"start": [0.23, -2.1],  "waypoints": [[0.53, -1.23, 0.3], [0.72, 0.72, 0.1]]},
+    {"start": [-0.29, -2.1], "waypoints": [[-0.74, -1.27, 0.3], [-0.77, 1.01, 0.54]]},
+    {"start": [0.0, -2.1],   "waypoints": [[0.0, -0.6, 0.3], [0.0, 0.9, 0.2]]}
+  ]
+}

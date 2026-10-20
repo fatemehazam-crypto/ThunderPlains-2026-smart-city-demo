@@ -1,0 +1,28 @@
+{
+  "name": "thunderplains-smartcity",
+  "version": "1.0.0",
+  "private": true,
+  "description": "An event-driven smart city testbed you can run on a laptop: MQTT bus, live dashboard, interference demo, drone replay, and audience phones as sensor nodes.",
+  "license": "MIT",
+  "engines": {
+    "node": ">=22.13"
+  },
+  "workspaces": [
+    "backend",
+    "broker",
+    "relay",
+    "bridge",
+    "drone-replay",
+    "stage",
+    "frontend",
+    "tools"
+  ],
+  "scripts": {
+    "start": "node stage/start.js",
+    "phones:test": "node bridge/swarm-test.js --n 40",
+    "phones:test-leave": "node bridge/swarm-test.js --n 40 --leave-after 30",
+    "phones:test-attack": "node bridge/swarm-test.js --n 20 --attack",
+    "check-sensors": "node tools/diag.js",
+    "sensor": "node tools/fake-sensor.js"
+  }
+}

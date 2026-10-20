@@ -1,0 +1,15 @@
+{
+  "name": "thunderplains-audience-bridge",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Presenter-laptop bridge from the audience relay onto the local MQTT bus",
+  "main": "bridge.js",
+  "scripts": {
+    "start": "node bridge.js",
+    "swarm": "node swarm-test.js"
+  },
+  "dependencies": {
+    "mqtt": "^5.10.4",
+    "socket.io-client": "^4.8.1"
+  }
+}
